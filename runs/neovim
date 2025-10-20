@@ -1,8 +1,21 @@
 #!/usr/bin/env bash
 
-git clone -b v0.10.1 git@github.com:neovim/neovim.git $HOME/Personal/neovim
-brew install cmake gettext lua5.1
+nvim_dir="$HOME/Personal/neovim"
 
-cd $HOME/personal/neovim
-make CMAKE_BUILD_TYPE=RelWithDebInfo
+if [ -d "$nvim_dir/.git" ]; then
+  echo "Neovim source already exists. Updating..."
+  cd "$nvim_dir"
+	rm -rf build/
+	make distclean
+  git checkout stable
+  git pull
+else
+  echo "Cloning Neovim stable..."
+  git clone -b stable git@github.com:neovim/neovim.git "$nvim_dir"
+  cd "$nvim_dir"
+fi
+
+brew list ninja cmake gettext lua@5.1 pkg-config curl git >/dev/null 2>&1 || brew install ninja cmake gettext lua5.1 pkg-config curl git
+
+make CMAKE_BUILD_TYPE=RelWithDebInfo -j$(nproc)
 sudo make install
