@@ -48,10 +48,11 @@ copy_dir() {
 copy_file() {
   from=$1
   to=$2
-  name=$(basename $from)
+  name=$(basename "$from")
 
   execute rm -f "$to/$name"
   execute cp "$from" "$to/$name"
 }
 
 copy_dir .config ~/.config
+copy_dir .local $HOME/.local
