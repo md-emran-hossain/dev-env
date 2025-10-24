@@ -27,4 +27,23 @@ return require('packer').startup(function(use)
 	use('mbbill/undotree')
 	use('tpope/vim-fugitive')
 	use('Exafunction/windsurf.vim')
+
+	use {
+		'VonHeikemen/lsp-zero.nvim',
+		branch = 'v1.x',
+		requires = {
+			'neovim/nvim-lspconfig',
+			'williamboman/mason.nvim',
+			{
+				'williamboman/mason-lspconfig.nvim',
+				run = function() vim.cmd('MasonUpdate') end
+			},
+			'hrsh7th/nvim-cmp',
+			'hrsh7th/cmp-nvim-lsp',
+			'hrsh7th/cmp-buffer',
+			'saadparwaiz1/cmp_luasnip',
+			'L3MON4D3/LuaSnip',
+			'j-hui/fidget.nvim',
+		}
+	}
 end)
