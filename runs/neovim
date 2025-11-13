@@ -11,11 +11,22 @@ if [ -d "$nvim_dir/.git" ]; then
   git pull
 else
   echo "Cloning Neovim stable..."
-  git clone -b stable git@github.com:neovim/neovim.git "$nvim_dir"
+  git clone -b stable https://github.com/neovim/neovim.git "$nvim_dir"
   cd "$nvim_dir"
 fi
 
-brew list ninja cmake gettext lua@5.1 pkg-config curl git >/dev/null 2>&1 || brew install ninja cmake gettext lua5.1 pkg-config curl git
+# Install dependencies for macOS or Arch Linux
+if command -v brew >/dev/null; then
+  brew list ninja cmake gettext lua@5.1 pkg-config curl git >/dev/null 2>&1 || \
+    brew install ninja cmake gettext lua@5.1 pkg-config curl git
+elif command -v pacman >/dev/null; then
+  for pkg in ninja cmake gettext lua51 pkgconf curl git; do
+    pacman -Qi $pkg >/dev/null 2>&1 || sudo pacman -S --noconfirm $pkg
+  done
+else
+  echo "Unsupported system. Please install: ninja, cmake, gettext, lua, pkg-config, curl, git manually."
+  exit 1
+fi
 
 make CMAKE_BUILD_TYPE=RelWithDebInfo -j$(nproc)
 sudo make install

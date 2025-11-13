@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-git clone git@github.com:junegunn/fzf.git $HOME/Personal/fzf
+git clone https://github.com/junegunn/fzf.git $HOME/Personal/fzf
 
 $HOME/Personal/fzf/install
 
