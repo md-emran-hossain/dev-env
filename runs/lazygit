@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+if ! command -v lazygit &>/dev/null; then
+  echo "Installing lazygit..."
+	if command -v brew &>/dev/null; then
+    brew install lazygit
+  elif command -v pacman &>/dev/null; then
+    sudo pacman -S --noconfirm lazygit
+  else
+    echo "Unsupported system. Please install lazygit manually."
+    exit 1
+  fi
+else
+	echo "lazygit is already installed."
+fi
