@@ -47,10 +47,14 @@ return require('packer').startup(function(use)
 		}
 	}
 
-	use ("lukas-reineke/indent-blankline.nvim")
+	use {'lukas-reineke/indent-blankline.nvim',
+		config = function()
+			require('ibl').setup()
+		end
+	}
 
 	use({
-		"kdheepak/lazygit.nvim",
+		'kdheepak/lazygit.nvim',
 		-- optional for floating window border decoration
 		requires = {
 			"nvim-lua/plenary.nvim",
