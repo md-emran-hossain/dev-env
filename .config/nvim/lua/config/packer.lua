@@ -47,6 +47,14 @@ return require('packer').startup(function(use)
 		}
 	}
 
+	use {
+		"folke/trouble.nvim",
+		requires = {
+			"nvim-tree/nvim-web-devicons",
+			-- "folke/todo-comments.nvim",
+		},
+	}
+
 	use {'lukas-reineke/indent-blankline.nvim',
 		config = function()
 			require('ibl').setup()
