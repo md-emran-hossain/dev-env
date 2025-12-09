@@ -4,29 +4,29 @@
 vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
-  -- Packer can manage itself
-  use 'wbthomason/packer.nvim'
+	-- Packer can manage itself
+	use 'wbthomason/packer.nvim'
 
 	use {
 		'nvim-telescope/telescope.nvim', tag = '0.1.8',
 		-- or                            , branch = '0.1.x',
-		requires = { {'nvim-lua/plenary.nvim'} }
+		requires = { { 'nvim-lua/plenary.nvim' } }
 	}
 
-	use({
+	use {
 		"rose-pine/neovim",
 		name = "rose-pine",
 		config = function()
 			vim.cmd("colorscheme rose-pine")
 		end
-	})
+	}
 
-	use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
-	use('nvim-treesitter/playground')
-	use('ThePrimeagen/harpoon')
-	use('mbbill/undotree')
-	use('tpope/vim-fugitive')
-	use('Exafunction/windsurf.vim')
+	use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
+	use 'nvim-treesitter/playground'
+	use 'ThePrimeagen/harpoon'
+	use 'mbbill/undotree'
+	use 'tpope/vim-fugitive'
+	use 'Exafunction/windsurf.vim'
 
 	use {
 		'VonHeikemen/lsp-zero.nvim',
@@ -47,32 +47,29 @@ return require('packer').startup(function(use)
 		}
 	}
 
+	use "stevearc/conform.nvim"
+
 	use {
 		"folke/trouble.nvim",
 		requires = {
-			"nvim-tree/nvim-web-devicons",
+			-- "nvim-tree/nvim-web-devicons",
 			-- "folke/todo-comments.nvim",
-		},
+		}
 	}
 
-	use {'lukas-reineke/indent-blankline.nvim',
+	use { 'lukas-reineke/indent-blankline.nvim',
 		config = function()
 			require('ibl').setup()
 		end
 	}
 
-	use({
+	use {
 		'kdheepak/lazygit.nvim',
 		-- optional for floating window border decoration
 		requires = {
 			"nvim-lua/plenary.nvim",
-		},
-	})
-
-	use {
-		'lewis6991/gitsigns.nvim',
-		config = function()
-			require('gitsigns').setup()
-		end
+		}
 	}
+
+	use 'lewis6991/gitsigns.nvim'
 end)
