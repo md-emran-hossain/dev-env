@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+if ! command -v prettier &>/dev/null; then
+	echo "Installing Prettier..."
+
+if command -v npm &>/dev/null; then
+	npm install -g prettier
+else
+	echo "npm is not installed. Please install Node.js first."
+	exit 1
+fi
+
+else
+	echo "Prettier is already installed."
+fi
