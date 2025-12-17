@@ -1,5 +1,11 @@
+vim.diagnostic.config({
+	virtual_text = true,     -- Show inline diagnostics
+	signs = true,            -- Show diagnostic signs in the sign column
+	update_in_insert = true, -- Update diagnostics while typing
+})
+
 require("trouble").setup {
-  focus = true,
+	focus = true,
 }
 
 local map = vim.keymap.set
