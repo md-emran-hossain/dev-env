@@ -1,3 +1,4 @@
+vim.g.mapleader = " "
 vim.opt.guicursor = ""
 
 vim.opt.nu = true
@@ -32,5 +33,3 @@ vim.opt.colorcolumn = "80"
 
 vim.opt.spell = true
 vim.opt.spelllang = { "en_us" }
-
-vim.g.mapleader = " "
