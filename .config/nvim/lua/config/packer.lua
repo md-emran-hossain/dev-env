@@ -14,10 +14,10 @@ return require('packer').startup(function(use)
 	}
 
 	use {
-		"rose-pine/neovim",
-		name = "rose-pine",
+		'rose-pine/neovim',
+		name = 'rose-pine',
 		config = function()
-			vim.cmd("colorscheme rose-pine")
+			vim.cmd('colorscheme rose-pine')
 		end
 	}
 
@@ -27,6 +27,9 @@ return require('packer').startup(function(use)
 	use 'mbbill/undotree'
 	use 'tpope/vim-fugitive'
 	use 'Exafunction/windsurf.vim'
+	use 'stevearc/conform.nvim'
+	use 'numToStr/Comment.nvim'
+	use 'lewis6991/gitsigns.nvim'
 
 	use {
 		'VonHeikemen/lsp-zero.nvim',
@@ -47,13 +50,11 @@ return require('packer').startup(function(use)
 		}
 	}
 
-	use "stevearc/conform.nvim"
-
 	use {
-		"folke/trouble.nvim",
+		'folke/trouble.nvim',
 		requires = {
-			-- "nvim-tree/nvim-web-devicons",
-			-- "folke/todo-comments.nvim",
+			-- 'folke/todo-comments.nvim',
+			'nvim-tree/nvim-web-devicons'
 		}
 	}
 
@@ -70,6 +71,4 @@ return require('packer').startup(function(use)
 			"nvim-lua/plenary.nvim",
 		}
 	}
-
-	use 'lewis6991/gitsigns.nvim'
 end)
