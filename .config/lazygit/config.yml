@@ -1,0 +1,20 @@
+gui:
+  theme:
+    activeBorderColor:
+      - "#31748f"
+      - bold
+    inactiveBorderColor:
+      - "#6e6a86"
+    searchingActiveBorderColor:
+      - "#ebbcba"
+      - bold
+    optionsTextColor:
+      - "#9ccfd8"
+    selectedLineBgColor:
+      - "#403d52" # Rose Pine highlight_med (same as selection in Neovim popups)
+    selectedRangeBgColor:
+      - "#403d52"
+git:
+  log:
+    showGraph: when-maximised
+    showWholeGraph: true
