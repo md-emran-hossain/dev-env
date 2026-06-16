@@ -58,6 +58,11 @@ return {
 						}
 					})
 				end,
+				intelephense = function()
+					require('lspconfig').intelephense.setup({
+						filetypes = { "php", "blade" }
+					})
+				end
 			}
 		})
 
