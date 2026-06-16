@@ -13,3 +13,10 @@ if ! command -v lazygit &>/dev/null; then
 else
 	echo "lazygit is already installed."
 fi
+
+# On macOS, lazygit reads configuration from Application Support, so we symlink it from ~/.config/lazygit/config.yml
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  echo "Setting up macOS symlink for lazygit config..."
+  mkdir -p "$HOME/Library/Application Support/lazygit"
+  ln -sf "$HOME/.config/lazygit/config.yml" "$HOME/Library/Application Support/lazygit/config.yml"
+fi
