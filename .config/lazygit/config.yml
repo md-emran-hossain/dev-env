@@ -18,3 +18,8 @@ git:
   log:
     showGraph: when-maximised
     showWholeGraph: true
+os:
+  editPreset: 'nvim'
+  edit: 'if [ -n "$NVIM" ]; then nvim --server "$NVIM" --remote-send "<C-\><C-n><cmd>close<cr>" && nvim --server "$NVIM" --remote {{filename}}; else nvim {{filename}}; fi'
+  editAtLine: 'if [ -n "$NVIM" ]; then nvim --server "$NVIM" --remote-send "<C-\><C-n><cmd>close<cr>" && nvim --server "$NVIM" --remote-send "<cmd>edit +{{line}} {{filename}}<cr>"; else nvim +{{line}} {{filename}}; fi'
+
