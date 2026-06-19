@@ -1,35 +1,24 @@
 #!/usr/bin/env bash
 
-nvim_dir="$HOME/Personal/neovim"
-
-if [ -d "$nvim_dir/.git" ]; then
-  echo "Neovim source already exists. Updating..."
-  cd "$nvim_dir"
-	rm -rf build/
-	make distclean
-  git checkout stable
-  git pull
-else
-  echo "Cloning Neovim stable..."
-  git clone -b stable https://github.com/neovim/neovim.git "$nvim_dir"
-  cd "$nvim_dir"
-fi
-
-# Install dependencies for macOS or Arch Linux
+# Install Neovim package via Brew (macOS) or Pacman (Arch Linux)
 if command -v brew >/dev/null; then
-  brew list ninja cmake gettext pkg-config curl git >/dev/null 2>&1 || \
-    brew install ninja cmake gettext pkg-config curl git
+  echo "Installing Neovim via Homebrew..."
+  if brew list neovim >/dev/null 2>&1; then
+    echo "Neovim already installed via Homebrew. Upgrading..."
+    brew upgrade neovim
+  else
+    brew install neovim
+  fi
 elif command -v pacman >/dev/null; then
-  for pkg in ninja cmake gettext pkgconf curl git; do
-    pacman -Qi $pkg >/dev/null 2>&1 || sudo pacman -S --noconfirm $pkg
-  done
+  echo "Installing Neovim via Pacman..."
+  pacman -Qi neovim >/dev/null 2>&1 || sudo pacman -S --noconfirm neovim
+elif command -v apt-get >/dev/null; then
+  echo "Installing Neovim via apt-get..."
+  dpkg -s neovim >/dev/null 2>&1 || {
+    sudo apt-get update
+    sudo apt-get install -y neovim
+  }
 else
-  echo "Unsupported system. Please install: ninja, cmake, gettext, pkg-config, curl, git manually."
+  echo "Unsupported system. Please install neovim manually."
   exit 1
 fi
-
-make distclean
-make CMAKE_BUILD_TYPE=RelWithDebInfo \
-  CMAKE_EXTRA_FLAGS="-DUSE_BUNDLED_LUAJIT=ON -DUSE_LUAROCKS=OFF" \
-  -j$(getconf _NPROCESSORS_ONLN)
-sudo make install
