@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+# Install tree-sitter CLI (required for nvim-treesitter parser compilation)
+if command -v brew >/dev/null; then
+  echo "Installing tree-sitter-cli via Homebrew..."
+  if brew list tree-sitter-cli >/dev/null 2>&1; then
+    echo "tree-sitter-cli already installed via Homebrew. Upgrading..."
+    brew upgrade tree-sitter-cli
+  else
+    brew install tree-sitter-cli
+  fi
+elif command -v pacman >/dev/null; then
+  echo "Installing tree-sitter via Pacman..."
+  # Arch Linux package is usually tree-sitter-cli
+  pacman -Qi tree-sitter-cli >/dev/null 2>&1 || sudo pacman -S --noconfirm tree-sitter-cli
+elif command -v apt-get >/dev/null; then
+  echo "Installing tree-sitter-cli via apt-get..."
+  dpkg -s tree-sitter-cli >/dev/null 2>&1 || {
+    sudo apt-get update
+    sudo apt-get install -y tree-sitter-cli
+  }
+else
+  echo "Unsupported system. Please install tree-sitter manually."
+  exit 1
+fi
