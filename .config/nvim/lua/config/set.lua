@@ -33,3 +33,25 @@ vim.opt.colorcolumn = "80"
 
 vim.opt.spell = true
 vim.opt.spelllang = { "en_us" }
+
+-- Hide the statusline completely (0 lines)
+vim.opt.laststatus = 0
+
+-- Function to smartly format the title for Tmux
+_G.get_custom_title = function()
+  local path = vim.api.nvim_buf_get_name(0)
+
+  -- 1. Strip the "oil://" prefix if we are in the file explorer
+  if path:match("^oil://") then
+    path = path:gsub("^oil://", "")
+  end
+
+  -- 2. Convert to a relative path based on the current project directory
+  path = vim.fn.fnamemodify(path, ":.")
+
+  return path
+end
+
+-- Set terminal title (so Tmux can grab it for its status bar)
+vim.opt.title = true
+vim.opt.titlestring = "%{%v:lua.get_custom_title()%}"
