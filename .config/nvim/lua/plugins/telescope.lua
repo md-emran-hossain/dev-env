@@ -49,5 +49,7 @@ return {
 				end,
 			})
 		end, { desc = 'Telescope grep project files' })
+
+		vim.keymap.set('n', '<leader>?', builtin.keymaps, { desc = 'Telescope keymaps (Cheat Sheet)' })
 	end
 }
