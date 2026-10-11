@@ -37,33 +37,27 @@ return {
 		lsp_zero.extend_lspconfig({
 			sign_text = true,
 			lsp_attach = lsp_attach,
-			capabilities = require('cmp_nvim_lsp').default_capabilities(),
 		})
 
 		require('mason').setup({})
 		require('mason-lspconfig').setup({
 			ensure_installed = { 'html', 'cssls', 'emmet_ls', 'ts_ls', 'intelephense', 'lua_ls', 'svelte' },
-			handlers = {
-				function(server_name)
-					require('lspconfig')[server_name].setup({})
-				end,
-				lua_ls = function()
-					require('lspconfig').lua_ls.setup({
-						settings = {
-							Lua = {
-								diagnostics = {
-									globals = { 'vim' }
-								}
-							}
-						}
-					})
-				end,
-				intelephense = function()
-					require('lspconfig').intelephense.setup({
-						filetypes = { "php", "blade" }
-					})
-				end
+		})
+
+		vim.lsp.config('*', {
+			capabilities = require('cmp_nvim_lsp').default_capabilities(),
+		})
+		vim.lsp.config('lua_ls', {
+			settings = {
+				Lua = {
+					diagnostics = {
+						globals = { 'vim' }
+					}
+				}
 			}
+		})
+		vim.lsp.config('intelephense', {
+			filetypes = { "php", "blade" }
 		})
 
 		local cmp = require('cmp')
