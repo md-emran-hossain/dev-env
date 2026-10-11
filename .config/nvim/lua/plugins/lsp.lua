@@ -42,7 +42,7 @@ return {
 
 		require('mason').setup({})
 		require('mason-lspconfig').setup({
-			ensure_installed = { 'html', 'cssls', 'emmet_ls', 'ts_ls', 'intelephense', 'lua_ls' },
+			ensure_installed = { 'html', 'cssls', 'emmet_ls', 'ts_ls', 'intelephense', 'lua_ls', 'svelte' },
 			handlers = {
 				function(server_name)
 					require('lspconfig')[server_name].setup({})
