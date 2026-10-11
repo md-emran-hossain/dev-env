@@ -6,6 +6,9 @@ if ! command -v lazygit &>/dev/null; then
     brew install lazygit
   elif command -v pacman &>/dev/null; then
     sudo pacman -Sy --noconfirm lazygit
+  elif command -v apt &>/dev/null; then
+    v=$(curl -s https://api.github.com/repos/jesseduffield/lazygit/releases/latest | grep -Po '"tag_name": *"v\K[^"]*')
+    curl -sL "https://github.com/jesseduffield/lazygit/releases/download/v$v/lazygit_${v}_linux_x86_64.tar.gz" | sudo tar xz -C /usr/local/bin lazygit
   else
     echo "Unsupported system. Please install lazygit manually."
     exit 1

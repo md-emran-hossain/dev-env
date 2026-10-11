@@ -14,11 +14,9 @@ elif command -v pacman >/dev/null; then
   # Arch Linux package is usually tree-sitter-cli
   pacman -Qi tree-sitter-cli >/dev/null 2>&1 || sudo pacman -S --noconfirm tree-sitter-cli
 elif command -v apt-get >/dev/null; then
-  echo "Installing tree-sitter-cli via apt-get..."
-  dpkg -s tree-sitter-cli >/dev/null 2>&1 || {
-    sudo apt-get update
-    sudo apt-get install -y tree-sitter-cli
-  }
+  echo "Installing tree-sitter-cli from GitHub release..."
+  curl -sL https://github.com/tree-sitter/tree-sitter/releases/latest/download/tree-sitter-linux-x64.gz | gunzip > /tmp/tree-sitter
+  sudo install /tmp/tree-sitter /usr/local/bin/
 else
   echo "Unsupported system. Please install tree-sitter manually."
   exit 1
