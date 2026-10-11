@@ -1,5 +1,18 @@
 #!/usr/bin/env bash
 
-git clone https://github.com/junegunn/fzf.git $HOME/Personal/fzf
-
-$HOME/Personal/fzf/install
+if ! command -v fzf &>/dev/null; then
+  echo "Installing fzf..."
+  if command -v brew &>/dev/null; then
+    brew install fzf
+  elif command -v pacman &>/dev/null; then
+    sudo pacman -S --noconfirm fzf
+  elif command -v apt &>/dev/null; then
+    v=$(curl -s https://api.github.com/repos/junegunn/fzf/releases/latest | grep -Po '"tag_name": *"v\K[^"]*')
+    curl -sL "https://github.com/junegunn/fzf/releases/download/v$v/fzf-$v-linux_amd64.tar.gz" | sudo tar xz -C /usr/local/bin fzf
+  else
+    echo "Unsupported system. Please install fzf manually."
+    exit 1
+  fi
+else
+  echo "fzf is already installed."
+fi
