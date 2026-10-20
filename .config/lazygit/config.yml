@@ -1,4 +1,9 @@
 gui:
+  showFileTree: false
+  nerdFontsVersion: "3"
+  showCommandLog: false
+  expandFocusedSidePanel: true
+  expandedSidePanelWeight: 2
   theme:
     activeBorderColor:
       - "#31748f"
@@ -15,6 +20,15 @@ gui:
     selectedRangeBgColor:
       - "#403d52"
 git:
+  diffRenderers:
+    - command: >-
+        delta --dark --paging=never --line-numbers
+        --file-style=omit --hunk-header-style=omit
+        --minus-style='syntax #3d2438' --minus-emph-style='syntax #6b2f4d'
+        --plus-style='syntax #1f3d45' --plus-emph-style='syntax #2f6068'
+        --line-numbers-minus-style='#eb6f92' --line-numbers-plus-style='#9ccfd8'
+        --line-numbers-zero-style='#6e6a86'
+        --line-numbers-left-format='' --line-numbers-right-format='{np:>3}│'
   log:
     showGraph: when-maximised
     showWholeGraph: true
@@ -22,4 +36,5 @@ os:
   editPreset: 'nvim'
   edit: 'if [ -n "$NVIM" ]; then nvim --server "$NVIM" --remote-send "<C-\><C-n><cmd>close<cr>" && nvim --server "$NVIM" --remote {{filename}}; else nvim {{filename}}; fi'
   editAtLine: 'if [ -n "$NVIM" ]; then nvim --server "$NVIM" --remote-send "<C-\><C-n><cmd>close<cr>" && nvim --server "$NVIM" --remote-send "<cmd>edit +{{line}} {{filename}}<cr>"; else nvim +{{line}} {{filename}}; fi'
-
+refresher:
+  refreshInterval: 5
