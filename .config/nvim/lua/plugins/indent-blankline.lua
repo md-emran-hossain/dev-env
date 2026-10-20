@@ -3,7 +3,11 @@ return {
 	main = "ibl",
 	config = function()
 		-- Rose Pine's "muted" color! Used for code comments
-		vim.api.nvim_set_hl(0, "IblScopeCustom", { fg = "#6e6a86", nocombine = true })
+		local function set_scope_hl()
+			vim.api.nvim_set_hl(0, "IblScopeCustom", { fg = "#6e6a86", nocombine = true })
+		end
+		set_scope_hl()
+		vim.api.nvim_create_autocmd("ColorScheme", { callback = set_scope_hl })
 
 		require("ibl").setup({
 			indent = {
